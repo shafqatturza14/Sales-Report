@@ -5,17 +5,12 @@ This repository contains a Power BI project titled Sales Dashboard, built on a l
 🧩 Data Model Overview
 The semantic model connects multiple dimension and fact tables with proper relationships to support slicing by:
 
-Date
-
-Product
-
-Market
-
-Division
-
-Region
-
-Business Type
+1. Date
+2. Product
+3. Market
+4. Division
+5. Region
+6. Business Type
 
 
 ⚙️ Project Highlights
@@ -25,13 +20,10 @@ Business Type
 
 📈 Visual KPIs including:
 
-Budget vs Sales Comparison
-
-Cumulative Achievements
-
-Year-over-Year Growth
-
-Top/Bottom Performance by Zone, Region, and Market
+1. Budget vs Sales Comparison
+2. Cumulative Achievements
+3. Year-over-Year Growth
+4. Top/Bottom Performance by Zone, Region, and Market
 
 📐 Fully relational data model with best practices (star schema style)
 
