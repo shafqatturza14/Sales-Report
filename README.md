@@ -1,4 +1,5 @@
 📊 Sales Dashboard – Power BI with SSAS Live Connection
+
 This repository contains a Power BI project titled Sales Dashboard, built on a live SSAS (SQL Server Analysis Services) model to provide real-time reporting on national sales performance.
 
 
