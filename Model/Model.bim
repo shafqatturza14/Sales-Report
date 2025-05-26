@@ -1,0 +1,1637 @@
+{
+  "name": "SemanticModel",
+  "compatibilityLevel": 1200,
+  "model": {
+    "culture": "en-US",
+    "dataSources": [
+      {
+        "name": "SqlServer 192.168.8.239 IrisNetSD_HPL",
+        "connectionString": "Provider=SQLNCLI11;Data Source=192.168.8.239;Initial Catalog=IrisNetSD_HPL;User ID=turza;Persist Security Info=true",
+        "impersonationMode": "impersonateServiceAccount",
+        "annotations": [
+          {
+            "name": "ConnectionEditUISource",
+            "value": "SqlServer"
+          }
+        ]
+      },
+      {
+        "name": "SqlServer 192.168.8.239 IrisNetSD_HPL 2",
+        "connectionString": "Provider=SQLNCLI11;Data Source=192.168.8.239;Initial Catalog=IrisNetSD_HPL;User ID=turza;Persist Security Info=true",
+        "impersonationMode": "impersonateServiceAccount",
+        "annotations": [
+          {
+            "name": "ConnectionEditUISource",
+            "value": "SqlServer"
+          }
+        ]
+      },
+      {
+        "name": "SqlServer 192.168.8.239 IrisNetSD_HPL 3",
+        "connectionString": "Provider=SQLNCLI11;User ID=turza;Persist Security Info=false;Data Source=192.168.8.239;Initial Catalog=IrisNetSD_HPL",
+        "impersonationMode": "impersonateServiceAccount",
+        "annotations": [
+          {
+            "name": "ConnectionEditUISource",
+            "value": "SqlServer"
+          }
+        ]
+      },
+      {
+        "name": "SqlServer 192.168.8.239 IrisNetSD_HPL 4",
+        "connectionString": "Provider=SQLNCLI11;Data Source=192.168.8.239;Initial Catalog=IrisNetSD_HPL;User ID=turza;Persist Security Info=false",
+        "impersonationMode": "impersonateServiceAccount",
+        "annotations": [
+          {
+            "name": "ConnectionEditUISource",
+            "value": "SqlServer"
+          }
+        ]
+      },
+      {
+        "name": "SqlServer 192.168.8.239 IrisNetSD_HPL 5",
+        "connectionString": "Provider=SQLNCLI11;Data Source=192.168.8.239;Initial Catalog=IrisNetSD_HPL;User ID=turza;Persist Security Info=false",
+        "impersonationMode": "impersonateServiceAccount",
+        "annotations": [
+          {
+            "name": "ConnectionEditUISource",
+            "value": "SqlServer"
+          }
+        ]
+      }
+    ],
+    "tables": [
+      {
+        "name": "SalesProduct",
+        "columns": [
+          {
+            "name": "EmployeeId",
+            "dataType": "int64",
+            "sourceColumn": "EmployeeId",
+            "sourceProviderType": "BigInt"
+          },
+          {
+            "name": "SaleDate",
+            "dataType": "dateTime",
+            "sourceColumn": "SaleDate",
+            "formatString": "General Date",
+            "sourceProviderType": "DBTimeStamp"
+          },
+          {
+            "name": "ProductId",
+            "dataType": "int64",
+            "sourceColumn": "ProductId",
+            "sourceProviderType": "BigInt"
+          },
+          {
+            "name": "MarketId",
+            "dataType": "int64",
+            "sourceColumn": "MarketId",
+            "sourceProviderType": "BigInt"
+          },
+          {
+            "name": "SaleQuantity",
+            "dataType": "double",
+            "sourceColumn": "SaleQuantity",
+            "sourceProviderType": "Numeric"
+          },
+          {
+            "name": "SaleAmount",
+            "dataType": "double",
+            "sourceColumn": "SaleAmount",
+            "sourceProviderType": "Numeric"
+          },
+          {
+            "name": "FreeQuantity",
+            "dataType": "double",
+            "sourceColumn": "FreeQuantity",
+            "sourceProviderType": "Numeric"
+          },
+          {
+            "name": "CreationTime",
+            "dataType": "dateTime",
+            "sourceColumn": "CreationTime",
+            "formatString": "General Date",
+            "sourceProviderType": "DBTimeStamp"
+          },
+          {
+            "name": "CreatedBy",
+            "dataType": "int64",
+            "sourceColumn": "CreatedBy",
+            "sourceProviderType": "BigInt"
+          },
+          {
+            "name": "DepotId",
+            "dataType": "int64",
+            "sourceColumn": "DepotId",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "type": "calculated",
+            "name": "TP Sales",
+            "dataType": "double",
+            "isDataTypeInferred": true,
+            "expression": " SalesProduct[FreeQuantity]*SalesProduct[SaleQuantity]"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "SalesProduct",
+            "dataView": "full",
+            "source": {
+              "type": "query",
+              "query": "SELECT [dbo].[SalesProduct].* FROM [dbo].[SalesProduct] where SaleDate BETWEEN DATEFROMPARTS(YEAR(DATEADD(YEAR, -2, GETDATE())), 1, 1) AND FORMAT(DATEADD(DAY, -DAY(GETDATE()), GETDATE()), 'yyyy-MM-dd')",
+              "dataSource": "SqlServer 192.168.8.239 IrisNetSD_HPL"
+            },
+            "annotations": [
+              {
+                "name": "QueryEditorSerialization",
+                "value": "<?xml version=\"1.0\" encoding=\"UTF-16\"?><Gemini xmlns=\"QueryEditorSerialization\"><AnnotationContent><![CDATA[<RSQueryCommandText>SELECT [dbo].[SalesProduct].* FROM [dbo].[SalesProduct] where SaleDate BETWEEN DATEFROMPARTS(YEAR(DATEADD(YEAR, -2, GETDATE())), 1, 1) AND FORMAT(DATEADD(DAY, -DAY(GETDATE()), GETDATE()), 'yyyy-MM-dd')</RSQueryCommandText><RSQueryCommandType>Text</RSQueryCommandType><RSQueryDesignState></RSQueryDesignState>]]></AnnotationContent></Gemini>"
+              }
+            ]
+          }
+        ],
+        "annotations": [
+          {
+            "name": "_TM_ExtProp_QueryDefinition",
+            "value": "SELECT [dbo].[SalesProduct].* FROM [dbo].[SalesProduct] where SaleDate BETWEEN DATEFROMPARTS(YEAR(DATEADD(YEAR, -2, GETDATE())), 1, 1) AND FORMAT(DATEADD(DAY, -DAY(GETDATE()), GETDATE()), 'yyyy-MM-dd')"
+          },
+          {
+            "name": "_TM_ExtProp_DbTableName",
+            "value": "SalesProduct"
+          },
+          {
+            "name": "_TM_ExtProp_DbSchemaName",
+            "value": "dbo"
+          },
+          {
+            "name": "QueryEditorSerialization",
+            "value": "<?xml version=\"1.0\" encoding=\"UTF-16\"?><Gemini xmlns=\"QueryEditorSerialization\"><AnnotationContent><![CDATA[<RSQueryCommandText>SELECT [dbo].[SalesProduct].* FROM [dbo].[SalesProduct] where SaleDate BETWEEN DATEFROMPARTS(YEAR(DATEADD(YEAR, -2, GETDATE())), 1, 1) AND FORMAT(DATEADD(DAY, -DAY(GETDATE()), GETDATE()), 'yyyy-MM-dd')</RSQueryCommandText><RSQueryCommandType>Text</RSQueryCommandType><RSQueryDesignState></RSQueryDesignState>]]></AnnotationContent></Gemini>"
+          }
+        ]
+      },
+      {
+        "name": "DimDate",
+        "dataCategory": "Time",
+        "columns": [
+          {
+            "name": "DateKey",
+            "dataType": "int64",
+            "sourceColumn": "DateKey",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "Date",
+            "dataType": "dateTime",
+            "isKey": true,
+            "sourceColumn": "Date",
+            "formatString": "dd/MM/yyyy",
+            "sourceProviderType": "DBDate",
+            "annotations": [
+              {
+                "name": "Format",
+                "value": "<Format Format=\"DateTimeCustom\"><DateTimes><DateTime LCID=\"1033\" Group=\"LongDate\" FormatString=\"dd/MM/yyyy\" /></DateTimes></Format>"
+              }
+            ]
+          },
+          {
+            "name": "Year",
+            "dataType": "int64",
+            "sourceColumn": "Year",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "Quarter",
+            "dataType": "int64",
+            "sourceColumn": "Quarter",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "Month",
+            "dataType": "int64",
+            "sourceColumn": "Month",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "Day",
+            "dataType": "int64",
+            "sourceColumn": "Day",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "Weekday",
+            "dataType": "int64",
+            "sourceColumn": "Weekday",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "type": "calculated",
+            "name": "YearMonth",
+            "dataType": "string",
+            "isDataTypeInferred": true,
+            "expression": [
+              " LEFT(DimDate[DateKey],6)",
+              ""
+            ]
+          },
+          {
+            "type": "calculated",
+            "name": "MonthName",
+            "dataType": "string",
+            "isDataTypeInferred": true,
+            "expression": "FORMAT(DimDate[Date],\"MMM\")",
+            "sortByColumn": "Month"
+          },
+          {
+            "type": "calculated",
+            "name": "YearMonthName",
+            "dataType": "string",
+            "isDataTypeInferred": true,
+            "expression": "FORMAT([Date],\"MMM-yy\")",
+            "sortByColumn": "YearMonth"
+          },
+          {
+            "type": "calculated",
+            "name": "DateFormat",
+            "dataType": "string",
+            "isDataTypeInferred": true,
+            "expression": "(FORMAT(DimDate[Date],\"dd-MMM-yyyy\"))"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "DimDate",
+            "dataView": "full",
+            "source": {
+              "type": "query",
+              "query": " SELECT [dbo].[DimDate].* FROM [dbo].[DimDate] ",
+              "dataSource": "SqlServer 192.168.8.239 IrisNetSD_HPL"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "_TM_ExtProp_QueryDefinition",
+            "value": " SELECT [dbo].[DimDate].* FROM [dbo].[DimDate] "
+          },
+          {
+            "name": "_TM_ExtProp_DbTableName",
+            "value": "DimDate"
+          },
+          {
+            "name": "_TM_ExtProp_DbSchemaName",
+            "value": "dbo"
+          }
+        ]
+      },
+      {
+        "name": "SalesProductCurrentMonth",
+        "columns": [
+          {
+            "name": "EmployeeId",
+            "dataType": "int64",
+            "sourceColumn": "EmployeeId",
+            "sourceProviderType": "BigInt"
+          },
+          {
+            "name": "SaleDate",
+            "dataType": "dateTime",
+            "sourceColumn": "SaleDate",
+            "formatString": "General Date",
+            "sourceProviderType": "Date"
+          },
+          {
+            "name": "ProductId",
+            "dataType": "int64",
+            "sourceColumn": "ProductId",
+            "sourceProviderType": "BigInt"
+          },
+          {
+            "name": "MarketId",
+            "dataType": "int64",
+            "sourceColumn": "MarketId",
+            "sourceProviderType": "BigInt"
+          },
+          {
+            "name": "SaleQuantity",
+            "dataType": "double",
+            "sourceColumn": "SaleQuantity",
+            "sourceProviderType": "Decimal"
+          },
+          {
+            "name": "SaleAmount",
+            "dataType": "double",
+            "sourceColumn": "SaleAmount",
+            "sourceProviderType": "Decimal"
+          },
+          {
+            "name": "FreeQuantity",
+            "dataType": "double",
+            "sourceColumn": "FreeQuantity",
+            "sourceProviderType": "Decimal"
+          },
+          {
+            "name": "CreationTime",
+            "dataType": "dateTime",
+            "sourceColumn": "CreationTime",
+            "formatString": "General Date",
+            "sourceProviderType": "Date"
+          },
+          {
+            "name": "CreatedBy",
+            "dataType": "int64",
+            "sourceColumn": "CreatedBy",
+            "sourceProviderType": "BigInt"
+          },
+          {
+            "name": "DepotId",
+            "dataType": "int64",
+            "sourceColumn": "DepotId",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "type": "calculated",
+            "name": "TP Sales",
+            "dataType": "double",
+            "isDataTypeInferred": true,
+            "expression": "SalesProductCurrentMonth[FreeQuantity]*SalesProductCurrentMonth[SaleQuantity]"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "SalesProductCurrentMonth",
+            "dataView": "full",
+            "source": {
+              "type": "query",
+              "query": "SELECT [dbo].[SalesProduct].* FROM [dbo].[SalesProduct] where SaleDate BETWEEN DATEADD(DAY, 1, EOMONTH(GETDATE(), -1)) AND CONVERT(date, GETDATE())",
+              "dataSource": "SqlServer 192.168.8.239 IrisNetSD_HPL"
+            },
+            "annotations": [
+              {
+                "name": "QueryEditorSerialization",
+                "value": "<?xml version=\"1.0\" encoding=\"UTF-16\"?><Gemini xmlns=\"QueryEditorSerialization\"><AnnotationContent><![CDATA[<RSQueryCommandText>SELECT [dbo].[SalesProduct].* FROM [dbo].[SalesProduct] where SaleDate BETWEEN DATEADD(DAY, 1, EOMONTH(GETDATE(), -1)) AND CONVERT(date, GETDATE())</RSQueryCommandText><RSQueryCommandType>Text</RSQueryCommandType><RSQueryDesignState></RSQueryDesignState>]]></AnnotationContent></Gemini>"
+              }
+            ]
+          }
+        ],
+        "annotations": [
+          {
+            "name": "_TM_ExtProp_QueryDefinition",
+            "value": "SELECT [dbo].[SalesProduct].* FROM [dbo].[SalesProduct] where SaleDate BETWEEN DATEADD(DAY, 1, EOMONTH(GETDATE(), -1)) AND CONVERT(date, GETDATE())"
+          },
+          {
+            "name": "_TM_ExtProp_DbTableName",
+            "value": "SalesProductCurrentMonth"
+          },
+          {
+            "name": "QueryEditorSerialization",
+            "value": "<?xml version=\"1.0\" encoding=\"UTF-16\"?><Gemini xmlns=\"QueryEditorSerialization\"><AnnotationContent><![CDATA[<RSQueryCommandText>SELECT [dbo].[SalesProduct].* FROM [dbo].[SalesProduct] where SaleDate BETWEEN DATEADD(DAY, 1, EOMONTH(GETDATE(), -1)) AND CONVERT(date, GETDATE())</RSQueryCommandText><RSQueryCommandType>Text</RSQueryCommandType><RSQueryDesignState></RSQueryDesignState>]]></AnnotationContent></Gemini>"
+          }
+        ]
+      },
+      {
+        "name": "PBI_Product_Master_T",
+        "columns": [
+          {
+            "name": "ProductId",
+            "dataType": "int64",
+            "sourceColumn": "ProductId",
+            "sourceProviderType": "BigInt"
+          },
+          {
+            "name": "ProductCode",
+            "dataType": "string",
+            "sourceColumn": "ProductCode",
+            "sourceProviderType": "Char"
+          },
+          {
+            "name": "ProductName",
+            "dataType": "string",
+            "sourceColumn": "ProductName",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "ProductType",
+            "dataType": "string",
+            "sourceColumn": "ProductType",
+            "sourceProviderType": "Char"
+          },
+          {
+            "name": "GenericName",
+            "dataType": "string",
+            "sourceColumn": "GenericName",
+            "sourceProviderType": "Char"
+          },
+          {
+            "name": "Strength",
+            "dataType": "string",
+            "sourceColumn": "Strength",
+            "sourceProviderType": "Char"
+          },
+          {
+            "name": "PackSize",
+            "dataType": "int64",
+            "sourceColumn": "PackSize",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "ActiveIngrediant",
+            "dataType": "string",
+            "sourceColumn": "ActiveIngrediant",
+            "sourceProviderType": "Char"
+          },
+          {
+            "name": "UnitTradePrice",
+            "dataType": "double",
+            "sourceColumn": "UnitTradePrice",
+            "sourceProviderType": "Numeric"
+          },
+          {
+            "name": "UnitVat",
+            "dataType": "double",
+            "sourceColumn": "UnitVat",
+            "sourceProviderType": "Numeric"
+          },
+          {
+            "name": "MRP",
+            "dataType": "double",
+            "sourceColumn": "MRP",
+            "sourceProviderType": "Numeric"
+          },
+          {
+            "name": "CreationTime",
+            "dataType": "dateTime",
+            "sourceColumn": "CreationTime",
+            "formatString": "General Date",
+            "sourceProviderType": "DBTimeStamp"
+          },
+          {
+            "name": "CreatedBy",
+            "dataType": "int64",
+            "sourceColumn": "CreatedBy",
+            "sourceProviderType": "BigInt"
+          },
+          {
+            "name": "UpdatedBy",
+            "dataType": "int64",
+            "sourceColumn": "UpdatedBy",
+            "sourceProviderType": "BigInt"
+          },
+          {
+            "name": "LastUpdatedDateTime",
+            "dataType": "dateTime",
+            "sourceColumn": "LastUpdatedDateTime",
+            "formatString": "General Date",
+            "sourceProviderType": "DBTimeStamp"
+          },
+          {
+            "name": "DARNo",
+            "dataType": "string",
+            "sourceColumn": "DARNo",
+            "sourceProviderType": "Char"
+          },
+          {
+            "name": "TherapeuticClass",
+            "dataType": "string",
+            "sourceColumn": "TherapeuticClass",
+            "sourceProviderType": "Char"
+          },
+          {
+            "name": "DosageForm",
+            "dataType": "string",
+            "sourceColumn": "DosageForm",
+            "sourceProviderType": "Char"
+          },
+          {
+            "name": "IsActive",
+            "dataType": "int64",
+            "sourceColumn": "IsActive",
+            "sourceProviderType": "UnsignedTinyInt"
+          },
+          {
+            "name": "SAP_ProductCode",
+            "dataType": "string",
+            "sourceColumn": "SAP_ProductCode",
+            "sourceProviderType": "Char"
+          },
+          {
+            "name": "IsImported",
+            "dataType": "int64",
+            "sourceColumn": "IsImported",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "ProductCategoryId",
+            "dataType": "int64",
+            "sourceColumn": "ProductCategoryId",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "ProductCategoryCode",
+            "dataType": "string",
+            "sourceColumn": "ProductCategoryCode",
+            "sourceProviderType": "Char"
+          },
+          {
+            "name": "ProductCategoryName",
+            "dataType": "string",
+            "sourceColumn": "ProductCategoryName",
+            "sourceProviderType": "Char"
+          },
+          {
+            "name": "ProductNature",
+            "dataType": "string",
+            "sourceColumn": "ProductNature",
+            "sourceProviderType": "Char"
+          },
+          {
+            "name": "BusinessNature",
+            "dataType": "string",
+            "sourceColumn": "BusinessNature",
+            "sourceProviderType": "Char"
+          },
+          {
+            "name": "Business_Type",
+            "dataType": "string",
+            "sourceColumn": "Business_Type",
+            "sourceProviderType": "Char"
+          },
+          {
+            "name": "Product_Type",
+            "dataType": "string",
+            "sourceColumn": "Product_Type"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "PBI_Product_Master_T",
+            "dataView": "full",
+            "source": {
+              "type": "query",
+              "query": "SELECT * FROM [dbo].[PBI_Product_Master_T]",
+              "dataSource": "SqlServer 192.168.8.239 IrisNetSD_HPL 2"
+            },
+            "annotations": [
+              {
+                "name": "QueryEditorSerialization",
+                "value": "<?xml version=\"1.0\" encoding=\"UTF-16\"?><Gemini xmlns=\"QueryEditorSerialization\"><AnnotationContent><![CDATA[<RSQueryCommandText>SELECT * FROM [dbo].[PBI_Product_Master_T]</RSQueryCommandText><RSQueryCommandType>Text</RSQueryCommandType><RSQueryDesignState></RSQueryDesignState>]]></AnnotationContent></Gemini>"
+              }
+            ]
+          }
+        ],
+        "annotations": [
+          {
+            "name": "_TM_ExtProp_QueryDefinition",
+            "value": "SELECT * FROM [dbo].[PBI_Product_Master_T]"
+          },
+          {
+            "name": "_TM_ExtProp_DbTableName",
+            "value": "PBI_Product_Master_T"
+          },
+          {
+            "name": "_TM_ExtProp_DbSchemaName",
+            "value": "dbo"
+          },
+          {
+            "name": "QueryEditorSerialization",
+            "value": "<?xml version=\"1.0\" encoding=\"UTF-16\"?><Gemini xmlns=\"QueryEditorSerialization\"><AnnotationContent><![CDATA[<RSQueryCommandText>SELECT * FROM [dbo].[PBI_Product_Master_T]</RSQueryCommandText><RSQueryCommandType>Text</RSQueryCommandType><RSQueryDesignState></RSQueryDesignState>]]></AnnotationContent></Gemini>"
+          }
+        ]
+      },
+      {
+        "name": "PBI_Market_master_t",
+        "columns": [
+          {
+            "name": "NationalCode",
+            "dataType": "string",
+            "sourceColumn": "NationalCode",
+            "sourceProviderType": "Char"
+          },
+          {
+            "name": "ZoneCode",
+            "dataType": "string",
+            "sourceColumn": "ZoneCode",
+            "sourceProviderType": "Char"
+          },
+          {
+            "name": "RegeionCode",
+            "dataType": "string",
+            "sourceColumn": "RegeionCode",
+            "sourceProviderType": "Char"
+          },
+          {
+            "name": "MarketId",
+            "dataType": "int64",
+            "sourceColumn": "MarketId",
+            "sourceProviderType": "BigInt"
+          },
+          {
+            "name": "MarketCode",
+            "dataType": "string",
+            "sourceColumn": "MarketCode",
+            "sourceProviderType": "Char"
+          },
+          {
+            "name": "Market",
+            "dataType": "string",
+            "sourceColumn": "Market",
+            "sourceProviderType": "Char"
+          },
+          {
+            "name": "EmployeeId",
+            "dataType": "int64",
+            "sourceColumn": "EmployeeId",
+            "sourceProviderType": "BigInt"
+          },
+          {
+            "name": "EmployeeCode",
+            "dataType": "string",
+            "sourceColumn": "EmployeeCode",
+            "sourceProviderType": "Char"
+          },
+          {
+            "name": "SAPEmpCode",
+            "dataType": "string",
+            "sourceColumn": "SAPEmpCode",
+            "sourceProviderType": "Char"
+          },
+          {
+            "name": "FullName",
+            "dataType": "string",
+            "sourceColumn": "FullName",
+            "sourceProviderType": "Char"
+          },
+          {
+            "name": "FatherName",
+            "dataType": "string",
+            "sourceColumn": "FatherName",
+            "sourceProviderType": "Char"
+          },
+          {
+            "name": "DesignationCode",
+            "dataType": "string",
+            "sourceColumn": "DesignationCode",
+            "sourceProviderType": "Char"
+          },
+          {
+            "name": "JoiningDate",
+            "dataType": "dateTime",
+            "sourceColumn": "JoiningDate",
+            "formatString": "General Date",
+            "sourceProviderType": "DBTimeStamp"
+          },
+          {
+            "name": "ConfirmedDate",
+            "dataType": "dateTime",
+            "sourceColumn": "ConfirmedDate",
+            "formatString": "General Date",
+            "sourceProviderType": "DBTimeStamp"
+          },
+          {
+            "name": "MarketJoiningDate",
+            "dataType": "dateTime",
+            "sourceColumn": "MarketJoiningDate",
+            "formatString": "General Date",
+            "sourceProviderType": "DBTimeStamp"
+          },
+          {
+            "name": "PromotionDate",
+            "dataType": "dateTime",
+            "sourceColumn": "PromotionDate",
+            "formatString": "General Date",
+            "sourceProviderType": "DBTimeStamp"
+          },
+          {
+            "name": "CellPhone",
+            "dataType": "string",
+            "sourceColumn": "CellPhone",
+            "sourceProviderType": "Char"
+          },
+          {
+            "name": "BloodGroup",
+            "dataType": "string",
+            "sourceColumn": "BloodGroup",
+            "sourceProviderType": "Char"
+          },
+          {
+            "name": "Sorting",
+            "dataType": "string",
+            "sourceColumn": "Sorting",
+            "sourceProviderType": "Char"
+          },
+          {
+            "name": "SAPMarketCode",
+            "dataType": "string",
+            "sourceColumn": "SAPMarketCode",
+            "sourceProviderType": "Char"
+          },
+          {
+            "name": "SAPDepotCode",
+            "dataType": "string",
+            "sourceColumn": "SAPDepotCode",
+            "sourceProviderType": "Char"
+          },
+          {
+            "name": "Creator",
+            "dataType": "string",
+            "sourceColumn": "Creator",
+            "sourceProviderType": "Char"
+          },
+          {
+            "name": "CcreationDate",
+            "dataType": "dateTime",
+            "sourceColumn": "CcreationDate",
+            "formatString": "General Date",
+            "sourceProviderType": "DBTimeStamp"
+          },
+          {
+            "name": "NatonalName",
+            "dataType": "string",
+            "sourceColumn": "NatonalName",
+            "sourceProviderType": "Char"
+          },
+          {
+            "name": "ZoneName",
+            "dataType": "string",
+            "sourceColumn": "ZoneName",
+            "sourceProviderType": "Char"
+          },
+          {
+            "name": "RegeionName",
+            "dataType": "string",
+            "sourceColumn": "RegeionName",
+            "sourceProviderType": "Char"
+          },
+          {
+            "name": "MarketName",
+            "dataType": "string",
+            "sourceColumn": "MarketName",
+            "sourceProviderType": "Char"
+          },
+          {
+            "name": "Email",
+            "dataType": "string",
+            "sourceColumn": "Email",
+            "sourceProviderType": "Char"
+          },
+          {
+            "name": "BatchNo",
+            "dataType": "string",
+            "sourceColumn": "BatchNo",
+            "sourceProviderType": "Char"
+          },
+          {
+            "name": "DivisionCode",
+            "dataType": "string",
+            "sourceColumn": "DivisionCode",
+            "sourceProviderType": "Char"
+          },
+          {
+            "name": "DivisionName",
+            "dataType": "string",
+            "sourceColumn": "DivisionName",
+            "sourceProviderType": "Char"
+          },
+          {
+            "name": "OwnerEmpName",
+            "dataType": "string",
+            "sourceColumn": "OwnerEmpName",
+            "sourceProviderType": "Char"
+          },
+          {
+            "name": "Business_Type",
+            "dataType": "string",
+            "sourceColumn": "Business_Type"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "PBI_Market_master_t",
+            "dataView": "full",
+            "source": {
+              "type": "query",
+              "query": "SELECT * FROM [dbo].[PBI_Market_master_t]",
+              "dataSource": "SqlServer 192.168.8.239 IrisNetSD_HPL 3"
+            },
+            "annotations": [
+              {
+                "name": "QueryEditorSerialization",
+                "value": "<?xml version=\"1.0\" encoding=\"UTF-16\"?><Gemini xmlns=\"QueryEditorSerialization\"><AnnotationContent><![CDATA[<RSQueryCommandText>SELECT * FROM [dbo].[PBI_Market_master_t]</RSQueryCommandText><RSQueryCommandType>Text</RSQueryCommandType><RSQueryDesignState></RSQueryDesignState>]]></AnnotationContent></Gemini>"
+              }
+            ]
+          }
+        ],
+        "measures": [
+          {
+            "name": "Zone Code",
+            "expression": [
+              " ",
+              "    LOOKUPVALUE(",
+              "        PBI_Zone_User_T[ZoneCode],",
+              "        PBI_Zone_User_T[UserName], \"HPL\\pallob.dey\"",
+              "    )",
+              ""
+            ]
+          }
+        ],
+        "annotations": [
+          {
+            "name": "_TM_ExtProp_QueryDefinition",
+            "value": "SELECT * FROM [dbo].[PBI_Market_master_t]"
+          },
+          {
+            "name": "_TM_ExtProp_DbTableName",
+            "value": "PBI_Market_master_t"
+          },
+          {
+            "name": "_TM_ExtProp_DbSchemaName",
+            "value": "dbo"
+          },
+          {
+            "name": "QueryEditorSerialization",
+            "value": "<?xml version=\"1.0\" encoding=\"UTF-16\"?><Gemini xmlns=\"QueryEditorSerialization\"><AnnotationContent><![CDATA[<RSQueryCommandText>SELECT * FROM [dbo].[PBI_Market_master_t]</RSQueryCommandText><RSQueryCommandType>Text</RSQueryCommandType><RSQueryDesignState></RSQueryDesignState>]]></AnnotationContent></Gemini>"
+          }
+        ]
+      },
+      {
+        "name": "tmp_BudgetTable2021",
+        "columns": [
+          {
+            "name": "Yearmo",
+            "dataType": "string",
+            "sourceColumn": "Yearmo",
+            "sourceProviderType": "Char"
+          },
+          {
+            "name": "marketid",
+            "dataType": "int64",
+            "sourceColumn": "marketid",
+            "sourceProviderType": "BigInt"
+          },
+          {
+            "name": "ProductId",
+            "dataType": "int64",
+            "sourceColumn": "ProductId",
+            "sourceProviderType": "BigInt"
+          },
+          {
+            "name": "BudgetQty",
+            "dataType": "int64",
+            "sourceColumn": "BudgetQty",
+            "sourceProviderType": "BigInt"
+          },
+          {
+            "name": "BudgetAmount",
+            "dataType": "double",
+            "sourceColumn": "BudgetAmount",
+            "sourceProviderType": "Numeric"
+          },
+          {
+            "type": "calculated",
+            "name": "Datekey",
+            "dataType": "string",
+            "isDataTypeInferred": true,
+            "expression": "CONCATENATE([Yearmo],\"01\")"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "tmp_BudgetTable2021",
+            "dataView": "full",
+            "source": {
+              "type": "query",
+              "query": "SELECT [dbo].[tmp_BudgetTable2021].* FROM [dbo].[tmp_BudgetTable2021]",
+              "dataSource": "SqlServer 192.168.8.239 IrisNetSD_HPL 5"
+            },
+            "annotations": [
+              {
+                "name": "QueryEditorSerialization",
+                "value": "<?xml version=\"1.0\" encoding=\"UTF-16\"?><Gemini xmlns=\"QueryEditorSerialization\"><AnnotationContent><![CDATA[<RSQueryCommandText>SELECT [dbo].[tmp_BudgetTable2021].* FROM [dbo].[tmp_BudgetTable2021]</RSQueryCommandText><RSQueryCommandType>Text</RSQueryCommandType><RSQueryDesignState></RSQueryDesignState>]]></AnnotationContent></Gemini>"
+              }
+            ]
+          }
+        ],
+        "annotations": [
+          {
+            "name": "_TM_ExtProp_QueryDefinition",
+            "value": "SELECT [dbo].[tmp_BudgetTable2021].* FROM [dbo].[tmp_BudgetTable2021]"
+          },
+          {
+            "name": "_TM_ExtProp_DbTableName",
+            "value": "tmp_BudgetTable2021"
+          },
+          {
+            "name": "_TM_ExtProp_DbSchemaName",
+            "value": "dbo"
+          },
+          {
+            "name": "QueryEditorSerialization",
+            "value": "<?xml version=\"1.0\" encoding=\"UTF-16\"?><Gemini xmlns=\"QueryEditorSerialization\"><AnnotationContent><![CDATA[<RSQueryCommandText>SELECT [dbo].[tmp_BudgetTable2021].* FROM [dbo].[tmp_BudgetTable2021]</RSQueryCommandText><RSQueryCommandType>Text</RSQueryCommandType><RSQueryDesignState></RSQueryDesignState>]]></AnnotationContent></Gemini>"
+          }
+        ]
+      },
+      {
+        "name": "PBI_Zone_User_T",
+        "columns": [
+          {
+            "name": "ZoneCode",
+            "dataType": "string",
+            "sourceColumn": "ZoneCode",
+            "sourceProviderType": "Char"
+          },
+          {
+            "name": "ZoneName",
+            "dataType": "string",
+            "sourceColumn": "ZoneName",
+            "sourceProviderType": "Char"
+          },
+          {
+            "name": "EmployeeCode",
+            "dataType": "string",
+            "sourceColumn": "EmployeeCode",
+            "sourceProviderType": "Char"
+          },
+          {
+            "name": "UserName",
+            "dataType": "string",
+            "sourceColumn": "UserName",
+            "sourceProviderType": "Char"
+          },
+          {
+            "name": "Name",
+            "dataType": "string",
+            "sourceColumn": "Name",
+            "sourceProviderType": "Char"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "PBI_Zone_User_T",
+            "dataView": "full",
+            "source": {
+              "type": "query",
+              "query": " SELECT [dbo].[PBI_Zone_User_T].* FROM [dbo].[PBI_Zone_User_T] ",
+              "dataSource": "SqlServer 192.168.8.239 IrisNetSD_HPL"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "_TM_ExtProp_QueryDefinition",
+            "value": " SELECT [dbo].[PBI_Zone_User_T].* FROM [dbo].[PBI_Zone_User_T] "
+          },
+          {
+            "name": "_TM_ExtProp_DbTableName",
+            "value": "PBI_Zone_User_T"
+          },
+          {
+            "name": "_TM_ExtProp_DbSchemaName",
+            "value": "dbo"
+          }
+        ]
+      },
+      {
+        "name": "PBI_Division_UserSecurity",
+        "columns": [
+          {
+            "name": "ForTheYear",
+            "dataType": "string",
+            "sourceColumn": "ForTheYear",
+            "sourceProviderType": "Char"
+          },
+          {
+            "name": "DivisionCode",
+            "dataType": "string",
+            "sourceColumn": "DivisionCode",
+            "sourceProviderType": "Char"
+          },
+          {
+            "name": "DivisionName",
+            "dataType": "string",
+            "sourceColumn": "DivisionName",
+            "sourceProviderType": "Char"
+          },
+          {
+            "name": "DivisionalHeadName",
+            "dataType": "string",
+            "sourceColumn": "DivisionalHeadName",
+            "sourceProviderType": "Char"
+          },
+          {
+            "name": "UserName",
+            "dataType": "string",
+            "sourceColumn": "UserName",
+            "sourceProviderType": "Char"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "PBI_Division_UserSecurity",
+            "dataView": "full",
+            "source": {
+              "type": "query",
+              "query": " SELECT [dbo].[PBI_Division_UserSecurity].* FROM [dbo].[PBI_Division_UserSecurity] ",
+              "dataSource": "SqlServer 192.168.8.239 IrisNetSD_HPL"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "_TM_ExtProp_QueryDefinition",
+            "value": " SELECT [dbo].[PBI_Division_UserSecurity].* FROM [dbo].[PBI_Division_UserSecurity] "
+          },
+          {
+            "name": "_TM_ExtProp_DbTableName",
+            "value": "PBI_Division_UserSecurity"
+          },
+          {
+            "name": "_TM_ExtProp_DbSchemaName",
+            "value": "dbo"
+          }
+        ]
+      }
+    ],
+    "relationships": [
+      {
+        "name": "fbfc4d70-eb01-4a86-812b-48a36f2f7e31",
+        "fromTable": "SalesProduct",
+        "fromColumn": "SaleDate",
+        "toTable": "DimDate",
+        "toColumn": "Date"
+      },
+      {
+        "name": "a624b880-74be-442c-8521-a63925b64cb7",
+        "fromTable": "SalesProductCurrentMonth",
+        "fromColumn": "SaleDate",
+        "toTable": "DimDate",
+        "toColumn": "Date"
+      },
+      {
+        "name": "d20e491e-11d7-4dee-a320-72d7635e89d4",
+        "fromTable": "SalesProduct",
+        "fromColumn": "ProductId",
+        "toTable": "PBI_Product_Master_T",
+        "toColumn": "ProductId"
+      },
+      {
+        "name": "64cb9034-b318-4339-9bca-036befa1365f",
+        "fromTable": "SalesProductCurrentMonth",
+        "fromColumn": "ProductId",
+        "toTable": "PBI_Product_Master_T",
+        "toColumn": "ProductId"
+      },
+      {
+        "name": "dad3481b-fa75-481a-9d93-1ffd7586ade2",
+        "fromTable": "SalesProduct",
+        "fromColumn": "MarketId",
+        "toTable": "PBI_Market_master_t",
+        "toColumn": "MarketId"
+      },
+      {
+        "name": "b57bca64-e0fa-4f67-b5bf-656107eebd35",
+        "fromTable": "SalesProductCurrentMonth",
+        "fromColumn": "MarketId",
+        "toTable": "PBI_Market_master_t",
+        "toColumn": "MarketId"
+      },
+      {
+        "name": "801dbcc9-b1f1-4263-a587-d30fd9f5aad8",
+        "fromTable": "tmp_BudgetTable2021",
+        "fromColumn": "marketid",
+        "toTable": "PBI_Market_master_t",
+        "toColumn": "MarketId"
+      },
+      {
+        "name": "2b2d5e81-71f0-46b1-8f5f-3241e5be742b",
+        "fromTable": "tmp_BudgetTable2021",
+        "fromColumn": "ProductId",
+        "toTable": "PBI_Product_Master_T",
+        "toColumn": "ProductId"
+      },
+      {
+        "name": "92fc55c0-ee3e-41fc-9f2d-72a8961d7a23",
+        "fromTable": "tmp_BudgetTable2021",
+        "fromColumn": "Datekey",
+        "toTable": "DimDate",
+        "toColumn": "DateKey"
+      },
+      {
+        "name": "ba3fb074-11d8-4f33-9efa-0945fc4337f5",
+        "fromTable": "PBI_Market_master_t",
+        "fromColumn": "ZoneCode",
+        "toTable": "PBI_Zone_User_T",
+        "toColumn": "ZoneCode"
+      },
+      {
+        "name": "8b18d2b2-dba4-4ab6-a9c6-a3421329e030",
+        "fromTable": "PBI_Market_master_t",
+        "fromColumn": "DivisionCode",
+        "toTable": "PBI_Division_UserSecurity",
+        "toColumn": "DivisionCode"
+      }
+    ],
+    "roles": [
+      {
+        "name": "SQLSERVERAGENT",
+        "modelPermission": "administrator",
+        "members": [
+          {
+            "memberName": "NT SERVICE\\SQLSERVERAGENT",
+            "memberId": "S-1-5-80-344959196-2060754871-2302487193-2804545603-1466107430"
+          }
+        ]
+      },
+      {
+        "name": "Aminul",
+        "modelPermission": "read",
+        "members": [
+          {
+            "memberName": "HPL\\aminul",
+            "memberId": "S-1-5-21-3888890667-3814149108-105243143-1137"
+          }
+        ]
+      },
+      {
+        "name": "Faisal",
+        "modelPermission": "read",
+        "members": [
+          {
+            "memberName": "HPL\\faisalahmed",
+            "memberId": "S-1-5-21-3888890667-3814149108-105243143-1268"
+          }
+        ]
+      },
+      {
+        "name": "Reza",
+        "modelPermission": "read",
+        "members": [
+          {
+            "memberName": "HPL\\ahreza",
+            "memberId": "S-1-5-21-3888890667-3814149108-105243143-1152"
+          }
+        ]
+      },
+      {
+        "name": "noor",
+        "modelPermission": "read",
+        "members": [
+          {
+            "memberName": "HPL\\noor",
+            "memberId": "S-1-5-21-3888890667-3814149108-105243143-1208"
+          }
+        ]
+      },
+      {
+        "name": "reyasat",
+        "modelPermission": "read",
+        "members": [
+          {
+            "memberName": "HPL\\reyashat",
+            "memberId": "S-1-5-21-3888890667-3814149108-105243143-1224"
+          }
+        ]
+      },
+      {
+        "name": "atik",
+        "modelPermission": "read",
+        "members": [
+          {
+            "memberName": "HPL\\atik",
+            "memberId": "S-1-5-21-3888890667-3814149108-105243143-1217"
+          }
+        ]
+      },
+      {
+        "name": "mahmudur",
+        "modelPermission": "read",
+        "members": [
+          {
+            "memberName": "HPL\\mahmudur.rahman",
+            "memberId": "S-1-5-21-3888890667-3814149108-105243143-1871"
+          }
+        ]
+      },
+      {
+        "name": "rezoan",
+        "modelPermission": "read",
+        "members": [
+          {
+            "memberName": "HPL\\rezoan",
+            "memberId": "S-1-5-21-3888890667-3814149108-105243143-1211"
+          }
+        ]
+      },
+      {
+        "name": "shahreaar",
+        "modelPermission": "read",
+        "members": [
+          {
+            "memberName": "HPL\\shahreaar.ekram",
+            "memberId": "S-1-5-21-3888890667-3814149108-105243143-9838"
+          }
+        ]
+      },
+      {
+        "name": "halim",
+        "modelPermission": "read",
+        "members": [
+          {
+            "memberName": "HPL\\md.halimuzzaman",
+            "memberId": "S-1-5-21-3888890667-3814149108-105243143-1126"
+          }
+        ]
+      },
+      {
+        "name": "junayed",
+        "modelPermission": "read",
+        "members": [
+          {
+            "memberName": "HPL\\md.zunayed",
+            "memberId": "S-1-5-21-3888890667-3814149108-105243143-7414"
+          }
+        ]
+      },
+      {
+        "name": "Marzukh",
+        "modelPermission": "read",
+        "members": [
+          {
+            "memberName": "HPL\\marzukh.ahmed",
+            "memberId": "S-1-5-21-3888890667-3814149108-105243143-10002"
+          }
+        ]
+      },
+      {
+        "name": "Rahat",
+        "modelPermission": "read",
+        "members": [
+          {
+            "memberName": "HPL\\rahat",
+            "memberId": "S-1-5-21-3888890667-3814149108-105243143-1133"
+          }
+        ]
+      },
+      {
+        "name": "Turza",
+        "modelPermission": "readRefresh",
+        "members": [
+          {
+            "memberName": "HPL\\shafqat.turza",
+            "memberId": "S-1-5-21-3888890667-3814149108-105243143-10231"
+          }
+        ]
+      },
+      {
+        "name": "Ashik",
+        "modelPermission": "read",
+        "members": [
+          {
+            "memberName": "HPL\\mdasiqur.rahman",
+            "memberId": "S-1-5-21-3888890667-3814149108-105243143-1947"
+          }
+        ]
+      },
+      {
+        "name": "Ripa",
+        "modelPermission": "read",
+        "members": [
+          {
+            "memberName": "HPL\\farzanaripa",
+            "memberId": "S-1-5-21-3888890667-3814149108-105243143-1271"
+          }
+        ]
+      },
+      {
+        "name": "Sajib",
+        "modelPermission": "read",
+        "members": [
+          {
+            "memberName": "HPL\\sajib.saha",
+            "memberId": "S-1-5-21-3888890667-3814149108-105243143-1659"
+          }
+        ]
+      },
+      {
+        "name": "MM",
+        "modelPermission": "read",
+        "members": [
+          {
+            "memberName": "HPL\\mmnoor.hossain",
+            "memberId": "S-1-5-21-3888890667-3814149108-105243143-1903"
+          }
+        ]
+      },
+      {
+        "name": "ZoneRole",
+        "modelPermission": "read",
+        "members": [
+          {
+            "memberName": "HPL\\reza",
+            "memberId": "S-1-5-21-3888890667-3814149108-105243143-1159"
+          },
+          {
+            "memberName": "HPL\\aktarruzzaman",
+            "memberId": "S-1-5-21-3888890667-3814149108-105243143-1158"
+          },
+          {
+            "memberName": "HPL\\mohdzakaria",
+            "memberId": "S-1-5-21-3888890667-3814149108-105243143-1855"
+          },
+          {
+            "memberName": "HPL\\rezaul.hasan",
+            "memberId": "S-1-5-21-3888890667-3814149108-105243143-1304"
+          },
+          {
+            "memberName": "HPL\\salauddin.ansary",
+            "memberId": "S-1-5-21-3888890667-3814149108-105243143-1305"
+          },
+          {
+            "memberName": "HPL\\mizanur.rahman",
+            "memberId": "S-1-5-21-3888890667-3814149108-105243143-1695"
+          },
+          {
+            "memberName": "HPL\\zahid.anowar",
+            "memberId": "S-1-5-21-3888890667-3814149108-105243143-1696"
+          },
+          {
+            "memberName": "HPL\\rezaulkarim",
+            "memberId": "S-1-5-21-3888890667-3814149108-105243143-1157"
+          },
+          {
+            "memberName": "HPL\\mahbubur.rahman",
+            "memberId": "S-1-5-21-3888890667-3814149108-105243143-1303"
+          },
+          {
+            "memberName": "HPL\\mdkawser.sarker",
+            "memberId": "S-1-5-21-3888890667-3814149108-105243143-1885"
+          },
+          {
+            "memberName": "HPL\\shahinur.rahman",
+            "memberId": "S-1-5-21-3888890667-3814149108-105243143-1773"
+          },
+          {
+            "memberName": "HPL\\artezaur.rahman",
+            "memberId": "S-1-5-21-3888890667-3814149108-105243143-1685"
+          },
+          {
+            "memberName": "HPL\\atmrabiul.islam",
+            "memberId": "S-1-5-21-3888890667-3814149108-105243143-1849"
+          },
+          {
+            "memberName": "HPL\\mynul.islam",
+            "memberId": "S-1-5-21-3888890667-3814149108-105243143-1876"
+          },
+          {
+            "memberName": "HPL\\emdad",
+            "memberId": "S-1-5-21-3888890667-3814149108-105243143-1161"
+          },
+          {
+            "memberName": "HPL\\rafiqul.sarker",
+            "memberId": "S-1-5-21-3888890667-3814149108-105243143-1687"
+          },
+          {
+            "memberName": "HPL\\mdboarhan.uddin",
+            "memberId": "S-1-5-21-3888890667-3814149108-105243143-1912"
+          },
+          {
+            "memberName": "HPL\\kazidaud",
+            "memberId": "S-1-5-21-3888890667-3814149108-105243143-1163"
+          },
+          {
+            "memberName": "HPL\\mahmudul.islam",
+            "memberId": "S-1-5-21-3888890667-3814149108-105243143-1302"
+          },
+          {
+            "memberName": "HPL\\mdkhasru.miah",
+            "memberId": "S-1-5-21-3888890667-3814149108-105243143-1913"
+          },
+          {
+            "memberName": "HPL\\akm.hasanuzzaman",
+            "memberId": "S-1-5-21-3888890667-3814149108-105243143-1799"
+          },
+          {
+            "memberName": "HPL\\abdulquddus",
+            "memberId": "S-1-5-21-3888890667-3814149108-105243143-1147"
+          },
+          {
+            "memberName": "HPL\\raju.ahmed",
+            "memberId": "S-1-5-21-3888890667-3814149108-105243143-1842"
+          },
+          {
+            "memberName": "HPL\\smalauddin",
+            "memberId": "S-1-5-21-3888890667-3814149108-105243143-1168"
+          },
+          {
+            "memberName": "HPL\\mdbakul.akter",
+            "memberId": "S-1-5-21-3888890667-3814149108-105243143-1901"
+          },
+          {
+            "memberName": "HPL\\mozammel",
+            "memberId": "S-1-5-21-3888890667-3814149108-105243143-1165"
+          },
+          {
+            "memberName": "HPL\\shamsuddin",
+            "memberId": "S-1-5-21-3888890667-3814149108-105243143-1156"
+          },
+          {
+            "memberName": "HPL\\na.masud",
+            "memberId": "S-1-5-21-3888890667-3814149108-105243143-1709"
+          },
+          {
+            "memberName": "HPL\\ferdous.ali",
+            "memberId": "S-1-5-21-3888890667-3814149108-105243143-1697"
+          },
+          {
+            "memberName": "HPL\\syedataur.rahman",
+            "memberId": "S-1-5-21-3888890667-3814149108-105243143-1917"
+          },
+          {
+            "memberName": "HPL\\abu.nyum",
+            "memberId": "S-1-5-21-3888890667-3814149108-105243143-1703"
+          },
+          {
+            "memberName": "HPL\\Kamruzzaman",
+            "memberId": "S-1-5-21-3888890667-3814149108-105243143-1279"
+          },
+          {
+            "memberName": "HPL\\rabiul",
+            "memberId": "S-1-5-21-3888890667-3814149108-105243143-1776"
+          },
+          {
+            "memberName": "HPL\\alamgir.hossain",
+            "memberId": "S-1-5-21-3888890667-3814149108-105243143-1865"
+          },
+          {
+            "memberName": "HPL\\mdnazmul.hussain",
+            "memberId": "S-1-5-21-3888890667-3814149108-105243143-1891"
+          },
+          {
+            "memberName": "HPL\\arfanuddin",
+            "memberId": "S-1-5-21-3888890667-3814149108-105243143-1160"
+          },
+          {
+            "memberName": "HPL\\ajoy.chowdhury",
+            "memberId": "S-1-5-21-3888890667-3814149108-105243143-1928"
+          },
+          {
+            "memberName": "HPL\\harun.rashid",
+            "memberId": "S-1-5-21-3888890667-3814149108-105243143-1748"
+          },
+          {
+            "memberName": "HPL\\jahirul.jewel",
+            "memberId": "S-1-5-21-3888890667-3814149108-105243143-1710"
+          },
+          {
+            "memberName": "HPL\\ziauddin",
+            "memberId": "S-1-5-21-3888890667-3814149108-105243143-1164"
+          },
+          {
+            "memberName": "HPL\\rabiul.alam",
+            "memberId": "S-1-5-21-3888890667-3814149108-105243143-1686"
+          },
+          {
+            "memberName": "HPL\\debabrata.mandal",
+            "memberId": "S-1-5-21-3888890667-3814149108-105243143-1714"
+          },
+          {
+            "memberName": "HPL\\biswajit.roy",
+            "memberId": "S-1-5-21-3888890667-3814149108-105243143-1306"
+          },
+          {
+            "memberName": "HPL\\jamal.khan",
+            "memberId": "S-1-5-21-3888890667-3814149108-105243143-1739"
+          },
+          {
+            "memberName": "HPL\\mdmoklesur.rahman",
+            "memberId": "S-1-5-21-3888890667-3814149108-105243143-2712"
+          },
+          {
+            "memberName": "HPL\\jalal.uddin",
+            "memberId": "S-1-5-21-3888890667-3814149108-105243143-1738"
+          },
+          {
+            "memberName": "HPL\\ibrahim.khan",
+            "memberId": "S-1-5-21-3888890667-3814149108-105243143-1691"
+          },
+          {
+            "memberName": "HPL\\mdmahfuzul.islam",
+            "memberId": "S-1-5-21-3888890667-3814149108-105243143-1815"
+          },
+          {
+            "memberName": "HPL\\rakibul.hasan",
+            "memberId": "S-1-5-21-3888890667-3814149108-105243143-2735"
+          },
+          {
+            "memberName": "HPL\\mdhasibul.hasan",
+            "memberId": "S-1-5-21-3888890667-3814149108-105243143-1850"
+          },
+          {
+            "memberName": "HPL\\humayun.kabir",
+            "memberId": "S-1-5-21-3888890667-3814149108-105243143-1753"
+          },
+          {
+            "memberName": "HPL\\atiur.rahman",
+            "memberId": "S-1-5-21-3888890667-3814149108-105243143-1713"
+          },
+          {
+            "memberName": "HPL\\ulfatul.alam",
+            "memberId": "S-1-5-21-3888890667-3814149108-105243143-1820"
+          },
+          {
+            "memberName": "HPL\\motiur.rahman",
+            "memberId": "S-1-5-21-3888890667-3814149108-105243143-1785"
+          },
+          {
+            "memberName": "HPL\\qasmanwar.hossain",
+            "memberId": "S-1-5-21-3888890667-3814149108-105243143-1853"
+          }
+        ],
+        "tablePermissions": [
+          {
+            "name": "PBI_Zone_User_T",
+            "filterExpression": "PBI_Zone_User_T[UserName]=USERNAME()"
+          }
+        ]
+      },
+      {
+        "name": "DivisionRole",
+        "modelPermission": "read",
+        "members": [
+          {
+            "memberName": "HPL\\shahadat",
+            "memberId": "S-1-5-21-3888890667-3814149108-105243143-1167"
+          },
+          {
+            "memberName": "HPL\\sarwariqbal",
+            "memberId": "S-1-5-21-3888890667-3814149108-105243143-1151"
+          },
+          {
+            "memberName": "HPL\\shahnoor",
+            "memberId": "S-1-5-21-3888890667-3814149108-105243143-1171"
+          },
+          {
+            "memberName": "HPL\\rokon",
+            "memberId": "S-1-5-21-3888890667-3814149108-105243143-1153"
+          },
+          {
+            "memberName": "HPL\\faizul",
+            "memberId": "S-1-5-21-3888890667-3814149108-105243143-1278"
+          }
+        ],
+        "tablePermissions": [
+          {
+            "name": "PBI_Division_UserSecurity",
+            "filterExpression": "PBI_Division_UserSecurity[UserName]=USERNAME()"
+          }
+        ]
+      },
+      {
+        "name": "Mitali",
+        "modelPermission": "read",
+        "members": [
+          {
+            "memberName": "HPL\\mitali",
+            "memberId": "S-1-5-21-3888890667-3814149108-105243143-1213"
+          }
+        ]
+      },
+      {
+        "name": "Galib",
+        "modelPermission": "read",
+        "members": [
+          {
+            "memberName": "HPL\\galib",
+            "memberId": "S-1-5-21-3888890667-3814149108-105243143-1216"
+          }
+        ]
+      },
+      {
+        "name": "HasanReza",
+        "modelPermission": "read",
+        "members": [
+          {
+            "memberName": "HPL\\khreza",
+            "memberId": "S-1-5-21-3888890667-3814149108-105243143-1223"
+          }
+        ]
+      },
+      {
+        "name": "Anuj",
+        "modelPermission": "read",
+        "members": [
+          {
+            "memberName": "HPL\\anuj.karmakar",
+            "memberId": "S-1-5-21-3888890667-3814149108-105243143-7415"
+          }
+        ]
+      }
+    ],
+    "annotations": [
+      {
+        "name": "ClientCompatibilityLevel",
+        "value": "400"
+      }
+    ]
+  },
+  "id": "SemanticModel"
+}
